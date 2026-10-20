@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "enderdev_hud",
+  "version": "${version}",
+  "name": "lite HUD",
+  "description": "A lightweight HUD mod with customizable RGB styling and performance shaders.",
+  "authors": ["not_wee"],
+  "contact": {
+    "homepage": "https://enderdevelopment.com",
+    "sources": "https://github.com/enderdevelopment/enderdev-hud"
+  },
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.enderdevelopment.hud.EnderDevHUDMod"
+    ],
+    "client": [
+      "com.enderdevelopment.hud.client.EnderDevHUDClient"
+    ]
+  },
+  "mixins": [
+    "enderdev_hud.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.0",
+    "minecraft": "1.21.11",
+    "fabric-api": "*"
+  }
+}

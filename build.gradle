@@ -1,0 +1,48 @@
+plugins {
+    id 'fabric-loom' version '1.6-SNAPSHOT'
+    id 'maven-publish'
+}
+
+version = project.mod_version
+
+group = project.maven_group
+
+archivesBaseName = project.archives_base_name
+
+repositories {
+    mavenCentral()
+    maven {
+        name = 'Fabric'
+        url = 'https://maven.fabricmc.net/'
+    }
+    maven {
+        name = 'Maven'
+        url = 'https://repo.maven.apache.org/maven2/'
+    }
+}
+
+loom {
+    minecraftVersion = project.minecraft_version
+    runDir = "../run"
+    accessWidener = "src/main/resources/${project.archives_base_name}.accesswidener"
+    remapModData = true
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.minecraft_version}:v2"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.loader_version}"
+}
+
+processResources {
+    inputs.property "version", project.version
+    inputs.property "minecraft_version", project.minecraft_version
+}
+
+jar {
+    from {
+        configurations.compileClasspath.get().filter { it.name.endsWith('accessWidener') }.collect { zipTree(it) }
+    } {
+        into 'META-INF'
+    }
+}
